@@ -1,0 +1,25 @@
+Было:
+
+def make_dict(filename):        # 2016.03.23_01:26:25 checked. prusanov
+    file = open(filename, 'r', encoding='utf-8')
+    words_list = file.read().split()
+    words_dict = {elem.lower().strip(".,!:;?()_+\"- "): words_list.count(elem) for elem in words_list}
+                # не очень оптимальный генератор, т.к. для каждого слова из списка приходится выполнять один и тот же подсчет, 
+                # а потом это заносить в один и тот же ключ словаря - немного проиграем во времени
+    list = []       # аккуратней с такими именами
+    for (key,value) in sorted(words_dict.items()):
+        list.append((key,value))
+    return list         # все же, лучше вернуть words_dict
+	
+	
+Стало:
+def make_dict(filename):        # 2016.03.23_01:26:25 checked. prusanov
+    file = open(filename, 'r', encoding='utf-8')
+    words_list = file.read().split() #Получаем список слов
+    striped_list = [word.lower().strip(".,!:;?()_+\"- ") for word in words_list] #Обрезаем знаки препинания для всех слов в списке 
+    set_words = set(striped_list) #Создаем множество (не будет повторения слов)
+    words_dict = {elem: striped_list.count(elem) for elem in set_words} #Пробегаем по множеству слов и проверяем их количество в списке
+    sorted_list = []       # аккуратней с такими именами
+    for (key,value) in sorted(words_dict.items()):
+        sorted_list.append((key,value))
+    return sorted_list         # все же, лучше вернуть words_dict
