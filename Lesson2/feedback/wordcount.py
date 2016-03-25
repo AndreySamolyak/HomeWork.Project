@@ -38,6 +38,7 @@ print_words(filename), которая подсчитывает, как част�
 
 import sys
 
+
 # +++ваш код+++
 # Определите и заполните функции print_words(filename) и print_top(filename).
 # Вы также можете написать вспомогательную функцию, которая читает файл,
@@ -54,6 +55,7 @@ def make_dict(filename):        # 2016.03.23_01:26:25 checked. prusanov
         sorted_list.append((key,value))
     return sorted_list         # все же, лучше вернуть words_dict
 
+
 def print_words(filename):      # 2016.03.23_01:29:20 checked. prusanov
     result = ''
     list = make_dict(filename)
@@ -61,6 +63,7 @@ def print_words(filename):      # 2016.03.23_01:29:20 checked. prusanov
     for elem in sorted_by_name:
         result += elem[0] + " " + str(elem[1]) + "\n"       # лучше в цикле накапливать список, а не строку
     return print(result)        # print лучше оставлять отдельно, без return
+
 
 def print_top(filename):        # 2016.03.23_01:30:41 checked. prusanov
     result = ''
@@ -70,7 +73,6 @@ def print_top(filename):        # 2016.03.23_01:30:41 checked. prusanov
         result += sorted_by_num[i][0] + " " + str(sorted_by_num[i][1]) + "\n"
     return print(result)
 
-###
 
 # Это базовый код для разбора аргументов коммандной строки.
 # Он вызывает print_words() и print_top(), которые необходимо определить.
