@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import urllib.request
+import shutil
 
 """ Logpuzzle
 На сервере лежит 9 изображений, являющихся частями одного изображения 
@@ -45,7 +46,10 @@ def read_urls(filename):
     извлекая имя хоста из имени файла (apple-cat.ru_access.log). Вычищает
     дубликаты и возвращает список url, отсортированный по названию изображения.
     """
-    return []
+    f = open(filename, encoding='utf-8')
+    match = re.findall(r'(?:/images/)([a-z]*_[0-9]{2}.jpg)', f.read())
+    set_images = sorted(set(match))
+    return set_images
   
 
 def download_images(img_urls, dest_dir):
@@ -56,7 +60,20 @@ def download_images(img_urls, dest_dir):
     отобразить картинку в сборе. Создает директорию, если это необходимо.
     """
     # +++ваш код+++
-  
+    protocol = 'http://'
+    hostname = 'yandex.ru' #введите хост для проверки
+    context = '/images/'
+    if not os.path.exists(dest_dir):
+        os.mkdir(dest_dir)
+    index_file = open(os.path.join(dest_dir, 'index.html'), 'w')
+    index_file.write("<html>\n<body>\n")
+    for i in range(len(img_urls)):
+        url = protocol + hostname + context + img_urls[i]
+        with urllib.request.urlopen(url) as response, open(dest_dir + 'img'+str(i) + '.jpg', 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+        index_file.write("<img src=" + "\"img" + str(i) + ".jpg\">")
+    index_file.write("\n</body>\n</html>\n")
+
 
 def main():
     args = sys.argv[1:]
