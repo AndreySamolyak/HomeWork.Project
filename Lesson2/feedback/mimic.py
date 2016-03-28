@@ -61,11 +61,10 @@ def print_mimic(mimic_dict, word):      # 2016.03.23_01:24:03 checked. prusanov
     result = ""
     for i in range(200):
         if word in mimic_dict:           # лучше просто:   if word in mimic_dict:
-            add_word = random.choice(mimic_dict[word]) 
-            result += add_word + " "            # не стоит склеивать строки в цикле, лучше накапливать список
+            add_word = random.choice(mimic_dict[word])            # не стоит склеивать строки в цикле, лучше накапливать список
         else:
             add_word = random.choice(mimic_dict[""])
-            result += add_word + " "            # строка повторяется - надо ее вынести и оставить только один раз
+        result += add_word + " "
         word = add_word
     return print(result)
 
