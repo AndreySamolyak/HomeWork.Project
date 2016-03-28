@@ -168,7 +168,7 @@ def extract_names(filename):
     babynames_dict = {}
     for i in range(1, len(striped_list), 7):
         babynames_dict[striped_list[i]] = {years_list[j]: (striped_list[i+j+1]).split() for j in range(5)}
-    #print(babynames_dict)
+    # print(babynames_dict)
     return babynames_dict
 
 
@@ -189,22 +189,30 @@ def print_names(babynames):
         ...
     """
     years = ['2012', '2010', '2005', '2000', '1990']
-    checked_year = input("Выберите год рождения (2012, 2010, 2005, 2000, 1990) : ")
-    sorted_list_by_year = []
-    while checked_year not in years:
-        checked_year = input("Для выбранного года статистика отсутсвует!\n"
-                             "Выберите год рождения (2012, 2010, 2005, 2000, 1990) : ")
-    for key, value in sorted(babynames.items()):
-        #print(key + " " + value[years.index(checked_year)])
-        sorted_list_by_year.append((key, value[checked_year]))
-    sorted_list_by_year = sorted(sorted_list_by_year, key=lambda elem: int(elem[1][0]), reverse=True)
-    print(sorted_list_by_year)
-    for i in range(len(sorted_list_by_year)):
-        if len(sorted_list_by_year[i][1]) == 2:
-            print(sorted_list_by_year[i][0] + " " + sorted_list_by_year[i][1][0] + " " + sorted_list_by_year[i][1][1])
+    checked_year = input("Выберите год рождения (2012, 2010, 2005, 2000, 1990): ")
+    while True:
+        while checked_year not in years:
+            checked_year = input("Для выбранного года статистика отсутсвует!\n"
+                            "Выберите год рождения (2012, 2010, 2005, 2000, 1990): ")
         else:
-            print(sorted_list_by_year[i][0] + " " + sorted_list_by_year[i][1][0])
+            sorted_list_by_year = []
+            for key, value in sorted(babynames.items()):
+                # print(key + " " + value[years.index(checked_year)])
+                sorted_list_by_year.append((key, value[checked_year]))
+            sorted_list_by_year = sorted(sorted_list_by_year, key=lambda elem: int(elem[1][0]), reverse=True)
+            # print(sorted_list_by_year)
+            for i in range(len(sorted_list_by_year)):
+                if len(sorted_list_by_year[i][1]) == 2:
+                    print(sorted_list_by_year[i][0] + " " + sorted_list_by_year[i][1][0] + " " + sorted_list_by_year[i][1][1])
+                else:
+                    print(sorted_list_by_year[i][0] + " " + sorted_list_by_year[i][1][0])
+        want_continue = input(r"Продолжить? (y/n): ")
+        if want_continue == 'y':
+            checked_year = input("Выберите год рождения (2012, 2010, 2005, 2000, 1990): ")
+        else:
+            sys.exit(0)
     return
+
 
 def main():
     # Код разбора командной строки
