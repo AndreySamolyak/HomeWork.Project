@@ -60,7 +60,7 @@ obj2.d = 'some text'
 class NewObject(SomeObject):
     b = 100.1
     def print_sum(self):
-        print (self.a + self.b + self.c)
+        print(self.a + self.b + self.c)
 
 # Классы наследуют атрибуты своих суперклассов.
 print(NewObject.a)
@@ -88,7 +88,7 @@ class NewObject2(SomeObject):
         self.c = c
 
     def __str__(self):
-        return ('[Объект класса NewObject: a=%s, b=%s, c=%s]' 
+        return ('[Объект класса NewObject2S: a=%s, b=%s, c=%s]'
                 % (self.a, self.b, self.c))
 
 obj4 = NewObject2(1,2,3)

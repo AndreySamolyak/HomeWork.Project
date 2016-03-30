@@ -193,14 +193,12 @@ def print_names(babynames):
     while True:
         while checked_year not in years:
             checked_year = input("Для выбранного года статистика отсутсвует!\n"
-                            "Выберите год рождения (2012, 2010, 2005, 2000, 1990): ")
+                                 "Выберите год рождения (2012, 2010, 2005, 2000, 1990): ")
         else:
             sorted_list_by_year = []
             for key, value in sorted(babynames.items()):
-                # print(key + " " + value[years.index(checked_year)])
                 sorted_list_by_year.append((key, value[checked_year]))
             sorted_list_by_year = sorted(sorted_list_by_year, key=lambda elem: int(elem[1][0]), reverse=True)
-            # print(sorted_list_by_year)
             for i in range(len(sorted_list_by_year)):
                 if len(sorted_list_by_year[i][1]) == 2:
                     print(sorted_list_by_year[i][0] + " " + sorted_list_by_year[i][1][0] + " " + sorted_list_by_year[i][1][1])
